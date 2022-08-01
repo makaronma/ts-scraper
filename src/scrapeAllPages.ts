@@ -58,14 +58,19 @@ const scrapeAllPages=async () => {
 
   const pages = await Promise.all(pagesItemsPromises)
   
-  
   const allItems = pages.flat(1)
   console.log(allItems.length)
   console.log(pages.length)
 
-  // await fs.writeFile('../output/result.csv', allItems,{ flag: 'a' }, err => {});
   
-  const file = fs.createWriteStream(path.resolve(__dirname, '../output/result.html'))
+  const folderPath = path.resolve(__dirname, '../output')
+  const filePath = path.resolve(__dirname, '../output/result.html')
+  if (!fs.existsSync(folderPath)){
+    fs.mkdirSync(folderPath);
+  }
+  fs.closeSync(fs.openSync(filePath, 'w'))
+
+  const file = fs.createWriteStream(filePath)
   file.on("error", (err) => {console.log(err)});
   file.write(
     "<table><tr><td>title</td><td>price</td><td>image</td></tr>\n",
