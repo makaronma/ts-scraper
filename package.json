@@ -6,7 +6,8 @@
     "start": "node ./dist/app.js",
     "build": "webpack --color --progress",
     "dev": "yarn build --watch --hot",
-    "clean": "rimraf output tmp .DS_Store dist"
+    "clean": "rimraf output tmp .DS_Store dist",
+    "reinstall": "rimraf node_modules && yarn"
   },
   "devDependencies": {
     "esbuild-loader": "2.13.1",
